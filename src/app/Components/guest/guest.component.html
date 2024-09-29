@@ -1,0 +1,154 @@
+<section class="header">
+
+  <div class="back">
+    <button class="btn toggle-button " (click)="goBack()" style="background-color: black;">
+      <i class="fas fa-arrow-left"></i> Back
+    </button>
+  </div>
+  <h2 class="text-center" style="color: rgb(0, 0, 0);">LIST OF GUEST'S</h2>
+
+
+  <section class="center">
+
+    <div>
+      <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"
+        style="font-size: 15px">Guest</button>
+      <br>
+
+
+    </div>
+  </section>
+  <br>
+
+
+  <table class="table custom-table" style="text-align: center;">
+    <thead>
+      <tr>
+        <th scope="col">Guest ID</th>
+        <th scope="col">GuestName</th>
+        <th scope="col">Guest Email</th>
+        <th scope="col">Guest Gender</th>
+        <th scope="col">Guest Address</th>
+        <th scope="col">Guest Contact</th>
+        <th scope="col">Action</th>
+      </tr>
+
+    </thead>
+    <tbody>
+      <tr *ngFor="let guest of guest |  orderBy:'guestId'">
+
+        <td>{{guest.guestId}}</td>
+        <td>{{guest.guestName}}</td>
+        <td>{{guest.guestEmail}}</td>
+        <td>{{guest.guestGender}}</td>
+        <td>{{guest.guestAddress}}</td>
+        <td>{{guest.guestContact}}</td>
+        <td>
+          <button class="btn btn-success" type="button" type="button" data-bs-toggle="modal"
+            data-bs-target="#exampleModal" (click)="onEditGue(guest)"
+            style="border: 1px solid black; background-color: green; ">
+            <mat-icon style="font-size:14px; vertical-align:middle;">edit</mat-icon> Edit
+          </button>
+          <button class="btn btn-danger" type="button" (click)="deleteGuests(guest.guestId)"
+            style="background-color: brown; border: 1px solid black;">
+            <mat-icon style="font-size:14px; vertical-align:middle;">delete</mat-icon>Delete
+          </button>
+        </td>
+
+
+      </tr>
+    </tbody>
+
+  </table>
+  <section class="center">
+    <div class="btn">
+      <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Add
+        Guest</button>
+    </div>
+  </section>
+
+</section>
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Guest Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formValue">
+          <div class="mb-3">
+            <label for="guestId" class="form-label">Guest Id</label>
+            <input type="text" formControlName="guestId" placeholder="Enter Id" class="form-control" id="guestId"
+              aria-describedby="emailHelp" required>
+            <div class="text-danger" *ngIf="formValue.get('guestId')?.invalid && formValue.get('guestId')?.touched">
+              Guest ID is required
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="guestName" class="form-label">Guest Name</label>
+            <input type="text" formControlName="guestName" placeholder="Enter Name" class="form-control" id="guestName"
+              required>
+            <div class="text-danger" *ngIf="formValue.get('guestName')?.invalid && formValue.get('guestName')?.touched">
+              Guest Name is required
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="guestEmail" class="form-label">Guest Email</label>
+            <input type="text" formControlName="guestEmail" placeholder="Enter Email" class="form-control"
+              id="guestEmail" aria-describedby="emailHelp" required pattern="[a-z0-9]+@gmail\.com$">
+            <div class="text-danger"
+              *ngIf="formValue.get('guestEmail')?.invalid && formValue.get('guestEmail')?.touched">
+              <span *ngIf="formValue.get('guestEmail')?.errors?.['required']">Guest Email is required</span>
+              <span *ngIf="formValue.get('guestEmail')?.errors?.['pattern']">Please enter a valid Gmail address</span>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="guestGender" class="form-label">Guest Gender</label>
+            <select formControlName="guestGender" class="form-select" id="guestGender" required>
+              <option value="">Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+            <div class="text-danger"
+              *ngIf="formValue.get('guestGender')?.invalid && formValue.get('guestGender')?.touched">Guest Gender is
+              required</div>
+          </div>
+
+          <div class="mb-3">
+            <label for="guestAddress" class="form-label">Guest Address</label>
+            <input type="text" formControlName="guestAddress" placeholder="Enter Address" class="form-control"
+              id="guestAddress" aria-describedby="emailHelp" required>
+            <div class="text-danger"
+              *ngIf="formValue.get('guestAddress')?.invalid && formValue.get('guestAddress')?.touched">
+              Guest Address is required
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="guestContact" class="form-label">Guest Contact</label>
+            <input type="text" formControlName="guestContact" placeholder="Enter Contact number" class="form-control"
+              id="guestContact" aria-describedby="emailHelp" required pattern="[0-9]{10}">
+            <div class="text-danger"
+              *ngIf="formValue.get('guestContact')?.invalid && formValue.get('guestContact')?.touched">
+              <span *ngIf="formValue.get('guestContact')?.errors?.['required']">Guest Contact is required</span>
+              <span *ngIf="formValue.get('guestContact')?.errors?.['pattern']">Please enter a 10-digit contact
+                number</span>
+            </div>
+          </div>
+
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button *ngIf="!isEditMode" type="button" class="btn btn-primary" [disabled]="!formValue.valid"
+          (click)="addGuest()">Add</button>
+        <button *ngIf="isEditMode" type="button" class="btn btn-primary" [disabled]="!formValue.valid"
+          (click)="updateGuests()">Update</button>
+      </div>
+    </div>
+  </div>
+</div>

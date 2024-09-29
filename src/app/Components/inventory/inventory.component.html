@@ -1,0 +1,123 @@
+<section class="header">
+  <div class="back">
+    <button class="btn toggle-button " (click)="goBack()" style="background-color:black;">
+
+      <i class="fas fa-arrow-left"></i> Back
+    </button>
+  </div>
+  <h2 class="text-center" style="color: rgb(0, 0, 0);">LIST OF INVENTORIES</h2>
+  <section class="center">
+    <div>
+      <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"
+        style="font-size: 15px">Add Inventory</button>
+      <br>
+    </div>
+  </section>
+  <br>
+
+  <table class="table custom-table" style="text-align: center;">
+    <thead>
+      <tr>
+        <th scope="col">Inventory ID</th>
+        <th scope="col">Inventory Type</th>
+        <th scope="col">Inventory Name</th>
+        <th scope="col">Inventory Stock</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let inventory of inventory |  orderBy:'inventoryId'">
+        <td>{{inventory.inventoryId}}</td>
+        <td>{{inventory.inventoryType}}</td>
+        <td>{{inventory.inventoryName}}</td>
+        <td>{{inventory.inventoryStock}}</td>
+        <td>
+          <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"
+            (click)="toggleEditState(inventory)" style="background-color:green;border: 1px solid black;">
+            <mat-icon style="font-size:14px; vertical-align: middle;">edit</mat-icon>Edit
+          </button>
+
+          <button class="btn btn-danger" type="button" (click)="deleteInventory(inventory.inventoryId)"
+            style="background-color:brown;border: 1px solid black;">
+            <mat-icon style="font-size:14px; vertical-align: middle;">delete</mat-icon>Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</section>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formValue">
+
+          <div class="mb-3">
+            <label for="inventoryId" class="form-label">Inventory Id</label>
+            <input type="text" formControlName="inventoryId" placeholder="Enter Id" class="form-control"
+              id="inventoryId" required pattern="[0-9]{3}" maxlength="3">
+            <div class="text-danger"
+              *ngIf="formValue.get('inventoryId')?.invalid && formValue.get('inventoryId')?.touched">Inventory ID is
+              required</div>
+          </div>
+          <div class="mb-3">
+            <label for="inventoryType" class="form-label">Inventory Type</label>
+            <select formControlName="inventoryType" class="form-control" id="inventoryType" required>
+              <option value="">Select Inventory Type</option>
+              <option value="Room">Room</option>
+              <option value="Reception">Reception</option>
+              <option value="Dining">Dining</option>
+              <option value="Toiletries">Toiletries</option>
+            </select>
+            <div class="text-danger"
+              *ngIf="formValue.get('inventoryType')?.invalid && formValue.get('inventoryType')?.touched">Inventory Type
+              is required</div>
+          </div>
+
+          <div class="mb-3">
+            <label for="inventoryName" class="form-label">Inventory Name</label>
+            <select formControlName="inventoryName" class="form-control" id="inventoryName" required>
+              <option value="">Select Inventory Name</option>
+              <option value="Bed & Bath Linens">Bed & Bath Linens</option>
+              <option value="Bathroom Amenities">Bathroom Amenities</option>
+              <option value="Logo Amenities">Logo Amenities</option>
+              <option value="Coffeemakers & Supplies">Coffeemakers & Supplies</option>
+              <option value="Room Appliances">Room Appliances</option>
+              <option value="Cleaning">Cleaning</option>
+              <option value="Paper Products">Paper Products</option>
+              <option value="Trash Cans & Bags">Trash Cans & Bags</option>
+            </select>
+            <div class="text-danger"
+              *ngIf="formValue.get('inventoryName')?.invalid && formValue.get('inventoryName')?.touched">Inventory Name
+              is required</div>
+          </div>
+
+          <div class="mb-3">
+            <label for="inventoryStock" class="form-label">Inventory Stock</label>
+            <input type="text" formControlName="inventoryStock" placeholder="Enter Stock" class="form-control"
+              id="inventoryStock" required >
+            <div class="text-danger"
+              *ngIf="formValue.get('inventoryStock')?.invalid && formValue.get('inventoryStock')?.touched">Inventory
+              Stock is required</div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+
+        <button type="button" class="btn btn-primary" [disabled]="!formValue.valid" (click)="addInventory()"
+          *ngIf="!isEditing">Add Inventory</button>
+        <button type="button" class="btn btn-primary" [disabled]="!formValue.valid" (click)="updateInventory()"
+          *ngIf="isEditing">Update Inventory</button>
+
+
+      </div>
+    </div>
+  </div>
+</div>

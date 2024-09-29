@@ -1,0 +1,217 @@
+<section class="header">
+  <div class="back">
+    <button class="btn toggle-button" (click)="goBack()" style="background-color: black;">
+      <i class="fas fa-arrow-left"></i> Back
+    </button>
+  </div>
+  <h3 class="text-center" style="color: rgb(231, 238, 238);">LIST OF RESERVATIONS</h3>
+  <section class="center">
+    <div>
+      <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#addReservationModal">
+        Make Reservation
+      </button>
+      <br>
+    </div>
+    <br>
+  </section>
+
+  <table class="table custom-table" style="text-align: center;">
+    <thead>
+      <tr>
+        <th scope="col">Reservation ID</th>
+        <th scope="col">Room No</th>
+        <th scope="col">Guest ID</th>
+        <th scope="col">Check-in</th>
+        <th scope="col">Check-out</th>
+        <th scope="col">No of Guests</th>
+        <th scope="col">Total Payment</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let reservation of reservations |  orderBy:'reservationId'">
+        <td>{{reservation.reservationId}}</td>
+        <td>{{reservation.roomId}}</td>
+        <td>{{reservation.guestId}}</td>
+        <td>{{reservation.checkInDate}}</td>
+        <td>{{reservation.checkOutDate}}</td>
+        <td>{{reservation.noOfGuest}}</td>
+        <td>{{reservation.totalPrice}}</td>
+        <td>
+          <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#editReservationModal"
+            (click)="onEditReservation(reservation)" style="background-color: green; border: 1px solid black;">
+            <mat-icon style="font-size: 14px; vertical-align: middle;">edit</mat-icon>Update
+          </button>
+          <button class="btn btn-danger" type="button" (click)="deleteReservation(reservation.reservationId)"
+            style="background-color: brown; border: 1px solid black;">
+            <mat-icon style="font-size: 14px; vertical-align: middle;">delete</mat-icon>Cancel
+          </button>
+          <button class="btn btn-success" type="button" style="background-color: orange; border: 1px solid black;"
+            routerLink="/booking">
+            <mat-icon style="font-size: 14px; vertical-align: middle;">money</mat-icon>Pay
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- Add Reservation Modal -->
+<div class="modal fade" id="addReservationModal" tabindex="-1" aria-labelledby="addReservationModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addReservationModalLabel">Make Reservation</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formValue">
+          <div class="mb-3">
+            <label for="reservationId" class="form-label">Reservation ID</label>
+            <input type="text" formControlName="reservationId" placeholder="Reservation ID" class="form-control"
+              id="reservationId" required >
+            <div class="text-danger"
+              *ngIf="formValue.get('reservationId')?.invalid && formValue.get('reservationId')?.touched">Reservation ID
+              is
+              required</div>
+          </div>
+          <div class="mb-3">
+            <label for="roomId" class="form-label">Room No</label>
+            <input type="text" formControlName="roomId" placeholder="Room ID" class="form-control" id="roomId" required>
+            <div class="text-danger" *ngIf="formValue.get('roomId')?.invalid && formValue.get('roomId')?.touched">Room
+              Number is
+              required</div>
+            <button class="fetch" (click)="fetchRoomDetails()">Fetch</button>
+          </div>
+          <table class="table" *ngIf="roomDetails.length > 0">
+            <thead>
+              <tr>
+                <th scope="col">Room ID</th>
+                <th scope="col">Room Type</th>
+                <th scope="col">Room Rent</th>
+                <th scope="col">Room Available</th>
+                <!-- Add other room detail headers here -->
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let room of roomDetails">
+                <td>{{ room.roomId }}</td>
+                <td>{{ room.roomType }}</td>
+                <td>{{ room.roomRent }}</td>
+                <td>{{ room.roomAvailable }}</td>
+                <!-- Add other room detail values here -->
+              </tr>
+            </tbody>
+          </table>
+          <div class="mb-3">
+            <label for="guestId" class="form-label">Guest ID</label>
+            <input type="text" formControlName="guestId" placeholder="Guest ID" class="form-control" id="guestId"
+              required>
+            <div class="text-danger" *ngIf="formValue.get('guestId')?.invalid && formValue.get('guestId')?.touched">
+              Guest Id is required</div>
+          </div>
+          
+          <div class="mb-3">
+            <label for="checkInDate" class="form-label">Check-in Date</label>
+            <input type="date" formControlName="checkInDate" class="form-control" id="checkInDate" required
+              [min]="formValue.get('checkInDate')?.value || todayDate">
+            <div class="text-danger"
+              *ngIf="formValue.get('checkInDate')?.invalid && formValue.get('checkInDate')?.touched">Check In Date
+              required</div>
+          </div>
+          <div class="mb-3">
+            <label for="checkOutDate" class="form-label">Check-out Date</label>
+            <input type="date" formControlName="checkOutDate" class="form-control" id="checkOutDate" required
+              [min]="formValue.get('checkInDate')?.value || todayDate">
+            <div class="text-danger"
+              *ngIf="formValue.get('checkOutDate')?.invalid && formValue.get('checkOutDate')?.touched">Check Out Date
+              required</div>
+          </div>
+
+
+          <div class="mb-3">
+            <label for="noOfGuest" class="form-label">No of Guests</label>
+            <input type="number" formControlName="noOfGuest" placeholder="No of Guests" class="form-control"
+              id="noOfGuest" required>
+            <div class="text-danger" *ngIf="formValue.get('noOfGuest')?.invalid && formValue.get('noOfGuest')?.touched">
+              Number of Guest is
+              required</div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" [disabled]="!formValue.valid"
+              (click)="formValue.valid ? addReservation() : null">Add Details</button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="editReservationModal" tabindex="-1" aria-labelledby="editReservationModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editReservationModalLabel">Edit Booking</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Edit Reservation form -->
+        <form [formGroup]="editReservationForm">
+          <div class="mb-3">
+            <label for="editReservationId" class="form-label">Reservation ID</label>
+            <input type="text" formControlName="editReservationId" class="form-control" required>
+            
+            <div class="text-danger"
+              *ngIf="editReservationForm.get('editReservationId')?.invalid && editReservationForm.get('editReservationId')?.touched">
+              Reservation ID is required</div>
+          </div>
+          <div class="mb-3">
+            <label for="editRoomId" class="form-label">Room No</label>
+            <input type="text" formControlName="editRoomId" class="form-control" required>
+            <div class="text-danger"
+              *ngIf="editReservationForm.get('editRoomId')?.invalid && editReservationForm.get('editRoomId')?.touched">
+              Room ID is required</div>
+          </div>
+          <div class="mb-3">
+            <label for="editGuestId" class="form-label">Guest ID</label>
+            <input type="text" formControlName="editGuestId" class="form-control" required>
+            <div class="text-danger"
+              *ngIf="editReservationForm.get('editGuestId')?.invalid && editReservationForm.get('editGuestId')?.touched">
+              Guest ID is required</div>
+          </div>
+          <div class="mb-3">
+            <label for="editCheckInDate" class="form-label">Check-in Date</label>
+            <input type="date" formControlName="editCheckInDate" class="form-control" required>
+            <div class="text-danger"
+              *ngIf="editReservationForm.get('editCheckInDate')?.invalid && editReservationForm.get('editCheckInDate')?.touched">
+              Check-in Date is required</div>
+          </div>
+          <div class="mb-3">
+            <label for="editCheckOutDate" class="form-label">Check-out Date</label>
+            <input type="date" formControlName="editCheckOutDate" class="form-control" required>
+            <div class="text-danger"
+              *ngIf="editReservationForm.get('editCheckOutDate')?.invalid && editReservationForm.get('editCheckOutDate')?.touched">
+              Check-out Date is required</div>
+          </div>
+          <div class="mb-3">
+            <label for="editNoOfGuest" class="form-label">No of Guests</label>
+            <input type="number" formControlName="editNoOfGuest" class="form-control" required>
+            <div class="text-danger"
+              *ngIf="editReservationForm.get('editNoOfGuest')?.invalid && editReservationForm.get('editNoOfGuest')?.touched">
+              Number of Guests is required</div>
+          </div>
+
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" [disabled]="!editReservationForm.valid"
+          (click)="editReservationForm.valid ? updateReservation() : null">Update</button>
+      </div>
+    </div>
+  </div>
+</div>

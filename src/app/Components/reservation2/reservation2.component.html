@@ -1,0 +1,21 @@
+<div class="reservation-list">
+  <h1 style="text-align: center;"><strong>Reservations List</strong></h1>
+  <div class="back">
+    <button class="btn toggle-button" (click)="goBack()">
+      <i class="fas fa-arrow-left"></i> Back
+    </button>
+  </div>
+  <div class="grid-container">
+    <div class="grid-item" *ngFor="let reservation of reservations">
+      <div class="reservation-card">
+        <div class="reservation-id">Reservation ID: {{ reservation.reservationId }}</div>
+        <div class="room-id">Room ID: {{ reservation.roomId }}</div>
+        <div class="guest-id">Guest ID: {{ reservation.guestId }}</div>
+        <div class="check-in">Check-in Date: {{ reservation.checkInDate }}</div>
+        <div class="check-out">Check-out Date: {{ reservation.checkOutDate }}</div>
+        <div class="no-of-guest">Number of Guests: {{ reservation.noOfGuest }}</div>
+        <div class="total-price">Total Price: {{ reservation.totalPrice }}</div>
+      </div>
+    </div>
+  </div>
+</div>

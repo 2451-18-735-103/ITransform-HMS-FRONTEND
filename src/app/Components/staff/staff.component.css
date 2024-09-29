@@ -1,0 +1,189 @@
+.header {
+  min-height: 100vh;
+  width: 100%;
+  background-image: linear-gradient(rgba(63, 66, 66, 0.2), rgba(70, 72, 73, 0.2)), url("https://poloandtweed.com/wp-content/uploads/2018/06/Aafkes-Blog-Photos-2021-09-29T200829.168.png");
+  position: relative;
+
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+nav {
+  display: flex;
+  padding: 1% 6%;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Georgia', cursive;
+}
+
+.nav-links ul li {
+  list-style: none;
+  display: inline-block;
+  padding: 8px 15px;
+  position: relative;
+  border-radius: 20px;
+
+  background: linear-gradient(#121213, #181717);
+
+}
+
+.nav-links ul li a:hover {
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+  background: linear-gradient(#000428, #004e92);
+}
+
+.nav-links ul li::after {
+  content: '';
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(45deg, black, blue, red);
+  display: block;
+  margin: auto;
+  transition: 0.5s;
+}
+
+.nav-links ul li:hover::after {
+  width: 100%;
+}
+
+.text-box {
+  width: 90%;
+  position: absolute;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+
+}
+
+.text-box h1 {
+  font-size: 62px;
+  color: white;
+  letter-spacing: 10px;
+
+  font-family: 'Copperplate', cursive;
+}
+
+.text-box p {
+  font-family: 'Georgia', cursive;
+  margin: 40px 0 30px 0;
+  font-size: 40px;
+  color: white;
+  line-height: 50px;
+  color: white;
+  font-weight: bolder;
+}
+
+
+.center {
+  text-align: center;
+  font-size: 62px;
+  color: whitesmoke;
+  letter-spacing: 5px;
+
+  font-family: 'Georgia', cursive;
+
+}
+
+.center h2 {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-style: bold;
+  color: white;
+  font-size: 42px;
+  text-shadow: #dd3675;
+  font-style: italic;
+  text-decoration-style: dashed;
+  font-family: 'Copperplate', Fantasy;
+}
+
+
+
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+
+
+
+
+
+
+
+
+.custom-table {
+  width: 87%;
+
+  margin: 0 auto;
+
+  border-radius: 10px;
+  border-radius: 10px;
+
+  overflow: hidden;
+
+}
+
+.center {
+  text-align: center;
+  font-size: 62px;
+  color: whitesmoke;
+  letter-spacing: 5px;
+
+  font-family: 'Georgia', cursive;
+
+}
+
+.search {
+  width: 86%;
+
+  margin: 0 auto;
+
+
+}
+
+.search-table {
+  width: 70%;
+
+  margin: 0 auto;
+
+  border-radius: 10px;
+
+  overflow: hidden;
+  border-collapse: collapse;
+  background-color: #f2f2f2;
+
+  color: #333;
+
+}
+
+
+.search-table th {
+  background-color: #333;
+
+  color: white;
+
+}
+
+
+.search-table tr:nth-child(even) {
+  background-color: #ddd;
+}
+
+.back {
+  display: flex;
+  align-items: right;
+  justify-content: flex-end;
+  margin-left: 20px;
+
+  color: aliceblue;
+}
+
+.btn {
+
+  color: white;
+
+}

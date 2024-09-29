@@ -1,0 +1,134 @@
+<section class="header">
+    <div class="back">
+        <button class="btn toggle-button " (click)="goBack()" style="background-color:black;">
+            <i class="fas fa-arrow-left"></i> Back
+        </button>
+    </div>
+
+    <h2 class="text-center" style="color: rgb(0, 0, 0);">LIST OF ROOMS</h2>
+
+    <!-- table -->
+    <section class="center">
+        <div>
+            <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#roomModal"
+                style="font-size: 15px" *ngIf="hasManagerRole()">Room</button>
+            <br>
+        </div>
+        <div>
+            <button class="btn btn-success" type="text" style="font-size: 15px"
+                *ngIf="hasReceptionistRole()">Room</button>
+            <br>
+        </div>
+
+        <div class="filter-section d-flex justify-content-end">
+            <input type="text" [(ngModel)]="searchText" (input)="filterRooms()" placeholder="Search by Room Type"
+                *ngIf="hasReceptionistRole()">
+
+        </div>
+
+    </section>
+
+    <br>
+
+    <!-- EDIT -->
+    <table class="table  custom-table" style="text-align: center;">
+        <thead class="head">
+            <tr>
+                <th scope="col">Room ID</th>
+                <th scope="col">Room Type</th>
+                <th scope="col">Room Rent</th>
+                <th scope="col">Room Available</th>
+                <th *ngIf="hasManagerRole()">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let room of room |  orderBy:'roomId'">
+                <td>{{room.roomId}}</td>
+                <td>{{room.roomType}}</td>
+                <td>{{room.roomRent}}</td>
+                <td>{{room.roomAvailable}}</td>
+                <td>
+                    <button class="btn btn-with-border mr-8" type="button" data-bs-toggle="modal"
+                        data-bs-target="#roomModal" (click)="onEditRoom(room)" style="background-color: green ;"
+                        *ngIf="hasManagerRole()">
+                        <mat-icon style="font-size: 14px; vertical-align: middle;">edit</mat-icon>Edit
+                    </button>
+                    <button class="btn btn-with-border ml-8" type="button" (click)="deleteRoom(room.roomId)"
+                        style="background-color:brown ;" *ngIf="hasManagerRole()">
+                        <mat-icon style="font-size: 14px; vertical-align: middle;">delete</mat-icon>Delete
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <section class="center">
+        <div class="btn">
+            <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#roomModal"
+                *ngIf="hasManagerRole()">Add Room
+            </button>
+        </div>
+    </section>
+</section>
+
+<!-- Room Modal -->
+<div class="modal fade" id="roomModal" tabindex="-1" aria-labelledby="roomModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="roomModalLabel">Add Room</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="roomForm">
+                    <div class="mb-3">
+                        <label for="roomId" class="form-label">Room ID</label>
+                        <input type="text" formControlName="roomId" placeholder="Enter Room ID" class="form-control"
+                            id="roomId" required [readonly]="addingRoom" pattern="[0-9]{3}" maxlength="3">
+                        <div class="text-danger"
+                            *ngIf="roomForm.get('roomId')?.invalid && roomForm.get('roomId')?.touched">
+                            Room ID is required
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="roomType" class="form-label">Room Type</label>
+                        <select formControlName="roomType" class="form-select" id="roomType" required>
+                            <option value="AC">AC</option>
+                            <option value="Non-AC">Non-AC</option>
+                        </select>
+                        <div class="text-danger"
+                            *ngIf="roomForm.get('roomType')?.invalid && roomForm.get('roomType')?.touched">
+                            Room Type is required
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="roomRent" class="form-label">Room Rent</label>
+                        <input type="text" formControlName="roomRent" placeholder="Enter Room Rent" class="form-control"
+                            id="roomRent" required>
+                        <div class="text-danger"
+                            *ngIf="roomForm.get('roomRent')?.invalid && roomForm.get('roomRent')?.touched">
+                            Room Rent is required
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="roomAvailable" class="form-label">Room Available</label>
+                        <input type="text" formControlName="roomAvailable" class="form-control" id="roomAvailable"
+           required readonly [ngModel]="true" >
+                            
+                        <div class="text-danger"
+                            *ngIf="roomForm.get('roomAvailable')?.invalid && roomForm.get('roomAvailable')?.touched">
+                            Room Availability is required
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-primary" [disabled]="!roomForm.valid" (click)="addRoom()"
+                    *ngIf="!addingRoom">Add Room</button>
+
+                <button type="button" class="btn btn-primary" [disabled]="!roomForm.valid" (click)="updateRoom()"
+                    *ngIf="addingRoom">Update Room</button>
+            </div>
+        </div>
+    </div>
+</div>

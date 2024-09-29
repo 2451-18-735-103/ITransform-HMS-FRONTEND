@@ -1,0 +1,41 @@
+<mat-toolbar color="primary" class="hotel">
+  <div class="left-content">
+    <button mat-button class="hotelleft">
+      <i style="font-family: cursive;">Taj Banjara</i>
+      <mat-icon style="color: gold;">star</mat-icon>
+    </button>
+    <button mat-button routerLink="/contactus">
+      Contact us<mat-icon style="color: gold;">settings_phone</mat-icon>
+    </button>
+    <button mat-button routerLink="/aboutus">
+      About Us<mat-icon style="color: gold;">info</mat-icon>
+    </button>
+
+
+
+  </div>
+  <div class="right-content">
+
+    <button mat-button *ngIf="userService.roleMatch(['ROLE_MANAGER'])" class="with-border" routerLink="/manager">{{
+      getLoggedInUsername() }}</button>
+    <button mat-button *ngIf="userService.roleMatch(['ROLE_RECEPTIONIST'])" class="with-border"
+      routerLink="/receptionist">{{ getLoggedInUsername() }}</button>
+    <button mat-button *ngIf="userService.roleMatch(['ROLE_OWNER'])" class="with-border" routerLink="/owner">{{
+      getLoggedInUsername() }}</button>
+    <button mat-button class="with-border" routerLink="/home">Home
+      <mat-icon style="color: gold;">home</mat-icon>
+    </button>
+    <button mat-button *ngIf="!isLoggedIn()" class="with-border" routerLink="/login">Login
+      <mat-icon style="color: gold;">login</mat-icon>
+    </button>
+    <br>
+    <button mat-button *ngIf="isLoggedIn()" (click)="logout()" class="with-border">Logout
+      <mat-icon style="color: gold;">exit_to_app</mat-icon>
+    </button>
+
+    <button mat-button *ngIf="!isLoggedIn()" class="with-border" routerLink="/register">Register
+      <mat-icon style="color: gold;">person_add</mat-icon>
+    </button>
+
+  </div>
+</mat-toolbar>

@@ -1,0 +1,79 @@
+body {
+    display: flex;
+    justify-content: center;
+    background-color: papayawhip;
+}
+
+.whole {
+    background-color: papayawhip;
+}
+
+.booking-container {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    max-width: 900px;
+    height: 600px;
+
+}
+
+.img {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 20px;
+}
+
+.img img {
+    max-width: 100%;
+    height: auto;
+}
+
+.form-content {
+    padding: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.booking-label {
+    display: block;
+    font-weight: bold;
+}
+
+.booking-input {
+    width: calc(100% - 120px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.booking-button {
+    background-color: #28a745;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.booking-button.pay-button {
+    background-color: #28a745;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.back {
+    display: flex;
+    align-items: right;
+    justify-content: flex-end;
+    margin-left: 20px;
+
+}

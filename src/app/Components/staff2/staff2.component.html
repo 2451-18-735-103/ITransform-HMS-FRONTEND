@@ -1,0 +1,22 @@
+<div class="staff-list">
+  <h1 style="text-align: center;"><strong>Staff List </strong> </h1>
+  <div class="back">
+    <button class="btn toggle-button " (click)="goBack()">
+      <i class="fas fa-arrow-left"></i>Back
+    </button>
+  </div>
+  <div class="grid-container">
+    <div class="grid-item" *ngFor="let staff of staffList">
+      <div class="staff-card">
+        <h1 style="text-align: center;"><i class="fas fa-users"></i></h1>
+        <div class="staff-id">Staff ID: {{ staff.staffId }}</div>
+        <div class="staff-name">Name: {{ staff.staffName }}</div>
+        <div class="staff-address">Address: {{ staff.address }}</div>
+        <div class="staff-salary">Salary: {{ staff.salary }}</div>
+        <div class="staff-email">Email: {{ staff.emailId }}</div>
+        <div class="staff-age">Age: {{ staff.age }}</div>
+
+      </div>
+    </div>
+  </div>
+</div>

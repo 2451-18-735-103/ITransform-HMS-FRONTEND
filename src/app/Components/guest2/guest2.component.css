@@ -1,0 +1,85 @@
+.guest-list {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: lightgrey;
+
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.grid-item {
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: #fff5cc;
+
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.grid-item:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+}
+
+.guest-details {
+  text-align: center;
+}
+
+.back {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+}
+
+.btn.toggle-button {
+
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+.btn.toggle-button i {
+  margin-right: 8px;
+  font-size: 24px;
+
+}
+
+.btn.toggle-button:hover {
+  background-color: tomato;
+
+}
+
+.btn.toggle-button:focus {
+  outline: none;
+}
+
+
+.delete-button {
+  background-color: #ff3333;
+
+  color: #fff;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.delete-button:hover {
+  background-color: #cc0000;
+
+}

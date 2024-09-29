@@ -1,0 +1,20 @@
+<div class="inventory-list">
+  <h1 style="text-align: center;"><strong>Inventory List</strong></h1>
+  <div class="back">
+    <button class="btn toggle-button" (click)="goBack()">
+      <i class="fas fa-arrow-left"></i> Back
+    </button>
+  </div>
+  <div class="grid-container">
+    <div class="grid-item" *ngFor="let inventory of inventories">
+      <div class="inventory-card">
+        <h1 style="text-align: center; color: #007BFF;"><i class="fas fa-cubes"></i></h1>
+        <div class="inventory-id">Inventory ID: {{ inventory.inventoryId }}</div>
+        <div class="inventory-type">Type: {{ inventory.inventoryType }}</div>
+        <div class="inventory-name">Name: {{ inventory.inventoryName }}</div>
+        <div class="inventory-stock">Stock: {{ inventory.inventoryStock }}</div>
+
+      </div>
+    </div>
+  </div>
+</div>

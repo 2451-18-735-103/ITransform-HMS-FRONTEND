@@ -1,0 +1,95 @@
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFAs9RVXAhlaApVfTaFtZrTQfVcDJd5m6L2w&usqp=CAU");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.payment-heading {
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
+}
+
+.payment-logo {
+  margin-bottom: 10px;
+}
+
+h1 {
+  color: #333;
+}
+
+.amount-pay {
+  margin-top: 10px;
+}
+
+strong {
+  color: #333;
+}
+
+.error,
+.loading {
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.error {
+  color: #ff5555;
+  background-color: #ffecec;
+}
+
+.loading {
+  color: #666;
+  background-color: #f0f0f0;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+
+
+.online {
+  color: aqua;
+  font-style: italic;
+  size: 100px;
+  font-size: 40px;
+  text-align: center;
+  margin-right: 20px;
+
+}
+
+.payment {
+  text-align: center;
+  font-size: 50px;
+  margin-right: 40px;
+
+
+}
+
+.back {
+  display: flex;
+  align-items: right;
+  justify-content: flex-end;
+  margin-left: 20px;
+  /* Adjust the margin as needed */
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFAs9RVXAhlaApVfTaFtZrTQfVcDJd5m6L2w&usqp=CAU");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}

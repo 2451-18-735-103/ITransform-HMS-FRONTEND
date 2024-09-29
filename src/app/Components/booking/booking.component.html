@@ -1,0 +1,56 @@
+<div class="whole">
+    <div class="back">
+        <button class="btn toggle-button " (click)="goBack()">
+            <i class="fas fa-arrow-left"></i> Back
+        </button>
+    </div>
+    <h1 style="padding-left: 600px; font-style: italic;">Booking Page</h1>
+
+    <body>
+
+        <div class="booking-container">
+
+            <div class="img">
+                <img src="https://cdn.dribbble.com/users/6498639/screenshots/15138706/media/0262f2a4841a14755bd96261e11b6334.gif"
+                    style="width: 100%;">
+            </div>
+            <div class="form-content">
+                <div class="form-group">
+                    <label class="booking-label">Reservation ID:</label>
+                    <input type="text" [(ngModel)]="reservationId" class="booking-input" />
+                    <button class="booking-button" (click)="fetchReservationDetails()">Fetch Details</button>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-fields">
+                        <div>
+                            <label class="booking-label">Room Number:</label>
+                            <input type="text" [value]="roomId" class="booking-input" readonly />
+                        </div>
+                        <div>
+                            <label class="booking-label">Check-In Date:</label>
+                            <input type="date" [value]="checkInDate" class="booking-input booking-checkin" readonly />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-fields">
+                        <div>
+                            <label class="booking-label">Check-Out Date:</label>
+                            <input type="date" [value]="checkOutDate" class="booking-input booking-checkout" readonly />
+                        </div>
+                        <div>
+                            <label class="booking-label">Total Price:</label>
+                            <input type="text" [value]="totalPrice" class="booking-input" readonly />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button class="booking-button pay-button" (click)="handlePayment()">Pay</button>
+                </div>
+            </div>
+        </div>
+    </body>
+</div>

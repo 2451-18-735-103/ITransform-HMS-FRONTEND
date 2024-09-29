@@ -1,0 +1,19 @@
+<div class="room-list">
+  <h1 class="title">Room List</h1>
+  <div class="back">
+    <button class="btn toggle-button" (click)="goBack()">
+      <i class="fas fa-arrow-left"></i>Back
+    </button>
+  </div>
+  <div class="grid-container">
+    <div class="grid-item" *ngFor="let room of roomList">
+      <div class="room-card">
+        <h1 class="icon"><i class="fas fa-bed"></i></h1>
+        <div class="room-id">Room ID: {{ room.roomId }}</div>
+        <div class="room-type">Type: {{ room.roomType }}</div>
+        <div class="room-rent">Rent: {{ room.roomRent }}</div>
+        <div class="room-availability">Availability: {{ room.roomAvailable }}</div>
+      </div>
+    </div>
+  </div>
+</div>

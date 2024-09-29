@@ -1,0 +1,77 @@
+.reservation-list {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.grid-item {
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: #f7f7f7;
+
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.grid-item:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+}
+
+.reservation-card {
+  border-radius: 8px;
+  padding: 15px;
+  background-color: palegoldenrod;
+
+  border: 1px solid yellow;
+
+  color: #444;
+
+}
+
+.reservation-card div {
+  margin-bottom: 5px;
+}
+
+.back {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+}
+
+.btn.toggle-button {
+  color: black;
+
+
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.btn.toggle-button i {
+  margin-right: 5px;
+}
+
+.btn.toggle-button:hover {
+  background-color: tomato;
+
+}
+
+.btn.toggle-button:focus {
+  outline: none;
+}

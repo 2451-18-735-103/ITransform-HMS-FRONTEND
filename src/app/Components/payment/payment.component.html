@@ -1,0 +1,21 @@
+
+  <div class="back">
+    <button class="btn toggle-button "  (click)="goBack()">
+     ->Back
+      </button>
+    </div>
+    <body>
+  <h1 class="online">Online</h1>
+  <h1 class="payment">Payment</h1>
+  <div class="payment-heading">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjHzYUqhkmidrXAPILvg2QYzARDoCKToR7gA&usqp=CAU" alt="Payment Logo" class="payment-logo">
+    <div class="amount-pay">
+      <strong style="color: black">Amount to Pay: {{ totalPrice }} INR</strong>
+    </div>
+    <br />
+    <div class="error" *ngIf="error">{{ error }}</div>
+    <div class="loading" *ngIf="loading">Creating order...</div>
+    <button (click)="handlePayment()" *ngIf="!loading" style="background-color: gold; color: aliceblue;">Pay Now</button>
+  </div>
+</body>
+

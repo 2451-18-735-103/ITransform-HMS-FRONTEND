@@ -1,0 +1,23 @@
+<div class="guest-list">
+  <h1 style="text-align: center;"> <strong>Guest List</strong></h1>
+  <div class="back">
+    <button class="btn toggle-button " (click)="goBack()">
+
+      <i class="fas fa-arrow-left"></i> Back
+    </button>
+  </div>
+  <div class="grid-container">
+    <div class="grid-item" *ngFor="let guest of guests">
+      <div class="guest-details">
+        <h1>
+          <mat-icon>person</mat-icon>
+        </h1>
+        <p>Guest Id: {{ guest.guestId }}</p>
+        <h2>{{ guest.guestName }}</h2>
+        <p>Email: {{ guest.guestEmail }}</p>
+        <button mat-button color="warn" (click)="deleteGuest(guest.guestId)">
+          <i class="fas fa-trash-alt"></i> Delete</button>
+      </div>
+    </div>
+  </div>
+</div>

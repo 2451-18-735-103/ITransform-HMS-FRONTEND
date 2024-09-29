@@ -1,0 +1,170 @@
+<section class="header">
+    <div class="back">
+        <button class="btn toggle-button" (click)="goBack()" style="background-color:black;">
+            <i class="fas fa-arrow-left"></i> Back
+        </button>
+    </div>
+
+    <h2 class="text-center" style="color: rgb(0, 0, 0);">LIST OF STAFFS</h2>
+
+    <section class="center">
+        <div>
+            <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#staffModal"
+                style="font-size: 15px">Staff</button>
+            <br>
+        </div>
+    </section>
+
+    <div class="search d-flex justify-content-end">
+        <input type="text" id="staffId" [(ngModel)]="searchStaffName" placeholder="search by name"
+            style="border-radius: 10px;">
+        <button (click)="onSearch()" style="background-color: green; border-radius: 10px;">Search</button>
+    </div>
+    <br>
+
+    <table class="table custom-table" style="text-align: center;">
+        <thead>
+            <tr>
+                <th scope="col">Staff ID</th>
+                <th scope="col">Staff Name</th>
+                <th scope="col">Address</th>
+                <th scope="col">Salary</th>
+                <th scope="col">Email Id</th>
+                <th scope="col">Age</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngIf="searchResults && searchResults.length > 0; else showFullStaff">
+                <tr *ngFor="let staff of searchResults |  orderBy:'staffId'">
+                    <td>{{ staff.staffId }}</td>
+                    <td>{{ staff.staffName }}</td>
+                    <td>{{ staff.address }}</td>
+                    <td>{{ staff.salary }}</td>
+                    <td>{{ staff.emailId }}</td>
+                    <td>{{ staff.age }}</td>
+                    <td>
+                        <button class="btn btn-success" type="button" data-bs-toggle="modal"
+                            data-bs-target="#staffModal" (click)="onEditStaff(staff)"
+                            style="background-color:green  ;border: 1px solid black;">Edit</button>
+                        <button class="btn btn-danger" type="button" (click)="deleteStaff(staff.staffId)"
+                            style="background-color:brown  ;border: 1px solid black;">Delete</button>
+                    </td>
+                </tr>
+            </ng-container>
+            <ng-template #showFullStaff>
+                <tr *ngFor="let staff of staff">
+                    <td>{{ staff.staffId }}</td>
+                    <td>{{ staff.staffName }}</td>
+                    <td>{{ staff.address }}</td>
+                    <td>{{ staff.salary }}</td>
+                    <td>{{ staff.emailId }}</td>
+                    <td>{{ staff.age }}</td>
+                    <td>
+                        <button class="btn btn-success" type="button" data-bs-toggle="modal"
+                            data-bs-target="#staffModal" (click)="onEditStaff(staff)"
+                            style="background-color:green  ;border: 1px solid black;">
+                            <mat-icon style="font-size:14px;vertical-align: middle;">edit</mat-icon>Edit
+                        </button>
+                        <button class="btn btn-danger" type="button" (click)="deleteStaff(staff.staffId)"
+                            style="background-color:brown  ;border: 1px solid black;">
+                            <mat-icon style="font-size:14px;vertical-align: middle;">delete</mat-icon>Delete
+                        </button>
+                    </td>
+                </tr>
+            </ng-template>
+        </tbody>
+    </table>
+
+    <section class="center">
+        <div class="btn">
+            <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#staffModal">Add
+                Staff</button>
+        </div>
+    </section>
+
+    <div class="modal fade" id="staffModal" tabindex="-1" aria-labelledby="staffModalLabel" aria-hidden="true">
+        <!-- ... Modal content ... -->
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+
+                    <h5 class="modal-title" id="staffModalLabel">Add Staff Details</h5>
+
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                </div>
+
+                <div class="modal-body">
+
+                    <form [formGroup]="staffForm">
+
+                        <div class="mb-3">
+                            <label for="staffId" class="form-label">Staff ID</label>
+                            <input type="text" formControlName="staffId" placeholder="Enter Staff ID"
+                                class="form-control" id="staffId" required >
+                            <div class="text-danger"
+                                *ngIf="staffForm.get('staffId')?.invalid && staffForm.get('staffId')?.touched">Staff ID
+                                is required</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="staffName" class="form-label">Staff Name</label>
+                            <input type="text" formControlName="staffName" placeholder="Enter Staff Name"
+                                class="form-control" id="staffName" required>
+                            <div class="text-danger"
+                                *ngIf="staffForm.get('staffName')?.invalid && staffForm.get('staffName')?.touched">Staff
+                                Name is required</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Address</label>
+                            <input type="text" formControlName="address" placeholder="Enter Address"
+                                class="form-control" id="address" required>
+                            <div class="text-danger"
+                                *ngIf="staffForm.get('address')?.invalid && staffForm.get('address')?.touched">Address
+                                is required</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="salary" class="form-label">Salary</label>
+                            <input type="text" formControlName="salary" placeholder="Enter Salary" class="form-control"
+                                id="salary" required pattern="[0-9]{4,8}">
+                            <div class="text-danger"
+                                *ngIf="staffForm.get('salary')?.invalid && staffForm.get('salary')?.touched">Salary is
+                                required</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="emailId" class="form-label">Email ID</label>
+                            <input type="text" formControlName="emailId" placeholder="Enter Email ID"
+                                class="form-control" id="emailId" required>
+                            <div class="text-danger"
+                                *ngIf="staffForm.get('emailId')?.invalid && staffForm.get('emailId')?.touched">Email ID
+                                is required</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="age" class="form-label">Age</label>
+                            <input type="text" formControlName="age" placeholder="Enter Age" class="form-control"
+                                id="age" required pattern="[0-9]{2}" maxlength="2">
+                            <div class="text-danger"
+                                *ngIf="staffForm.get('age')?.invalid && staffForm.get('age')?.touched">Age is required
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+
+
+                <div class="modal-footer">
+                    <button id="addButton" type="button" class="btn btn-primary" [disabled]="!staffForm.valid"
+                        (click)="addStaff()" *ngIf="!isEditMode">Add</button>
+                    <button id="updateButton" type="button" class="btn btn-primary" [disabled]="!staffForm.valid"
+                        (click)="updateStaff()" *ngIf="isEditMode">Update</button>
+                </div>
+
+
+
+            </div>
+
+        </div>
+    </div>
+</section>
